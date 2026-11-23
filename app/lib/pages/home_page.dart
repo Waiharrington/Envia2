@@ -17,8 +17,7 @@ import 'package:refena_flutter/refena_flutter.dart';
 enum HomeTab {
   receive(Icons.south_rounded),
   send(Icons.north_east_rounded),
-  settings(Icons.tune_rounded)
-  ;
+  settings(Icons.tune_rounded);
 
   const HomeTab(this.icon);
 
@@ -43,11 +42,7 @@ class HomePage extends StatefulWidget {
   /// because the first init clears the cache
   final bool appStart;
 
-  const HomePage({
-    required this.initialTab,
-    required this.appStart,
-    super.key,
-  });
+  const HomePage({required this.initialTab, required this.appStart, super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -94,12 +89,7 @@ class _HomePageState extends State<HomePage> with Refena {
         if (droppedFiles.isNotEmpty) {
           await ref
               .redux(selectedSendingFilesProvider)
-              .dispatchAsync(
-                AddFilesAction(
-                  files: droppedFiles,
-                  converter: CrossFileConverters.convertXFile,
-                ),
-              );
+              .dispatchAsync(AddFilesAction(files: droppedFiles, converter: CrossFileConverters.convertXFile));
         }
         vm.changeTab(HomeTab.send);
       },
@@ -153,10 +143,7 @@ class _HomePageState extends State<HomePage> with Refena {
                                       children: [
                                         const Icon(Icons.file_download_rounded, size: 100, color: Colors.white),
                                         const SizedBox(height: 24),
-                                        Text(
-                                          t.sendTab.placeItems,
-                                          style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.white),
-                                        ),
+                                        Text(t.sendTab.placeItems, style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.white)),
                                       ],
                                     ),
                                   ),
@@ -171,10 +158,7 @@ class _HomePageState extends State<HomePage> with Refena {
               ),
             ),
             bottomNavigationBar: isMobile
-                ? _BrandBottomBar(
-                    selectedIndex: vm.currentTab.index,
-                    onSelect: (index) => vm.changeTab(HomeTab.values[index]),
-                  )
+                ? _BrandBottomBar(selectedIndex: vm.currentTab.index, onSelect: (index) => vm.changeTab(HomeTab.values[index]))
                 : null,
           );
         },
@@ -203,9 +187,7 @@ class _BrandSidebar extends StatelessWidget {
           colors: [Color(0xFF1D6BB4), Color(0xFF5530B1), Color(0xFF351D79)],
         ),
         borderRadius: BorderRadius.circular(26),
-        boxShadow: [
-          BoxShadow(color: const Color(0xFF4E36A8).withValues(alpha: 0.22), blurRadius: 28, offset: const Offset(0, 12)),
-        ],
+        boxShadow: [BoxShadow(color: const Color(0xFF4E36A8).withValues(alpha: 0.22), blurRadius: 28, offset: const Offset(0, 12))],
       ),
       child: Column(
         children: [
@@ -216,13 +198,7 @@ class _BrandSidebar extends StatelessWidget {
             )
           else ...[
             const SizedBox(height: 4),
-            Image.asset(
-              'assets/img/somosdos/wordmark-white.png',
-              width: 184,
-              height: 120,
-              fit: BoxFit.contain,
-              semanticLabel: 'Somos Dos Studio',
-            ),
+            Image.asset('assets/img/somosdos/wordmark-white.png', width: 184, height: 120, fit: BoxFit.contain, semanticLabel: 'Somos Dos Studio'),
             const Text(
               'ENVIA2',
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, letterSpacing: 2.2, fontSize: 12),
@@ -232,12 +208,7 @@ class _BrandSidebar extends StatelessWidget {
           for (var i = 0; i < HomeTab.values.length; i++)
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
-              child: _SidebarDestination(
-                tab: HomeTab.values[i],
-                selected: selectedIndex == i,
-                compact: compact,
-                onTap: () => onSelect(i),
-              ),
+              child: _SidebarDestination(tab: HomeTab.values[i], selected: selectedIndex == i, compact: compact, onTap: () => onSelect(i)),
             ),
           const Spacer(),
           if (!compact)
@@ -279,7 +250,10 @@ class _SidebarDestination extends StatelessWidget {
                       Icon(tab.icon, color: foreground, size: 21),
                       const SizedBox(width: 14),
                       Expanded(
-                        child: Text(tab.label, style: TextStyle(color: foreground, fontWeight: selected ? FontWeight.w700 : FontWeight.w500)),
+                        child: Text(
+                          tab.label,
+                          style: TextStyle(color: foreground, fontWeight: selected ? FontWeight.w700 : FontWeight.w500),
+                        ),
                       ),
                       if (selected) const Icon(Icons.chevron_right_rounded, color: Colors.white70, size: 18),
                     ],
@@ -311,8 +285,7 @@ class _BrandTopBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Envia2', style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800, height: 1)),
-              if (!compact)
-                Text('SOMOS DOS STUDIO', style: textTheme.labelSmall?.copyWith(color: colors.onSurfaceVariant, letterSpacing: 1.2)),
+              if (!compact) Text('SOMOS DOS STUDIO', style: textTheme.labelSmall?.copyWith(color: colors.onSurfaceVariant, letterSpacing: 1.2)),
             ],
           ),
           const Spacer(),
@@ -320,7 +293,10 @@ class _BrandTopBar extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(color: colors.primaryContainer, borderRadius: BorderRadius.circular(99)),
-              child: Text(pageTitle, style: textTheme.labelLarge?.copyWith(color: colors.onPrimaryContainer, fontWeight: FontWeight.w700)),
+              child: Text(
+                pageTitle,
+                style: textTheme.labelLarge?.copyWith(color: colors.onPrimaryContainer, fontWeight: FontWeight.w700),
+              ),
             ),
         ],
       ),
@@ -351,7 +327,9 @@ class _BrandBottomBar extends StatelessWidget {
         child: Row(
           children: [
             for (var i = 0; i < HomeTab.values.length; i++)
-              Expanded(child: _MobileDestination(tab: HomeTab.values[i], selected: selectedIndex == i, onTap: () => onSelect(i))),
+              Expanded(
+                child: _MobileDestination(tab: HomeTab.values[i], selected: selectedIndex == i, onTap: () => onSelect(i)),
+              ),
           ],
         ),
       ),

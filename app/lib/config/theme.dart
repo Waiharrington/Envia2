@@ -73,9 +73,7 @@ ThemeData getTheme(ColorMode colorMode, Color customColor, Brightness brightness
     // same density on all platforms so desktop matches mobile (defaults to compact on desktop)
     visualDensity: VisualDensity.standard,
     navigationBarTheme: colorScheme.brightness == Brightness.dark
-        ? NavigationBarThemeData(
-            iconTheme: WidgetStateProperty.all(const IconThemeData(color: Colors.white)),
-          )
+        ? NavigationBarThemeData(iconTheme: WidgetStateProperty.all(const IconThemeData(color: Colors.white)))
         : null,
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
@@ -91,11 +89,7 @@ ThemeData getTheme(ColorMode colorMode, Color customColor, Brightness brightness
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
     ),
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      ),
-    ),
+    textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8))),
     fontFamily: fontFamily,
   );
 }
@@ -159,10 +153,7 @@ extension InputDecorationThemeExt on InputDecorationThemeData {
 }
 
 ColorScheme _determineColorScheme(ColorMode mode, Color customColor, Brightness brightness, DynamicColors? dynamicColors) {
-  final defaultColorScheme = ColorScheme.fromSeed(
-    seedColor: _brandBlue,
-    brightness: brightness,
-  ).copyWith(
+  final defaultColorScheme = ColorScheme.fromSeed(seedColor: _brandBlue, brightness: brightness).copyWith(
     primary: _brandBlue,
     onPrimary: Colors.white,
     secondary: _brandPurple,
@@ -174,27 +165,16 @@ ColorScheme _determineColorScheme(ColorMode mode, Color customColor, Brightness 
   final colorScheme = switch (mode) {
     ColorMode.system => dynamicColors == null ? null : _withBrandAccents(brightness == Brightness.light ? dynamicColors.light : dynamicColors.dark),
     ColorMode.localsend => null,
-    ColorMode.oled => _withBrandAccents(dynamicColors?.dark ?? defaultColorScheme).copyWith(
-      surface: Colors.black,
-    ),
+    ColorMode.oled => _withBrandAccents(dynamicColors?.dark ?? defaultColorScheme).copyWith(surface: Colors.black),
     ColorMode.yaru => throw 'Should reach here',
-    ColorMode.custom => ColorScheme.fromSeed(
-      seedColor: customColor,
-      brightness: brightness,
-    ),
+    ColorMode.custom => ColorScheme.fromSeed(seedColor: customColor, brightness: brightness),
   };
 
   return colorScheme ?? defaultColorScheme;
 }
 
 ColorScheme _withBrandAccents(ColorScheme colorScheme) {
-  return colorScheme.copyWith(
-    primary: _brandBlue,
-    onPrimary: Colors.white,
-    secondary: _brandPurple,
-    onSecondary: Colors.white,
-    tertiary: _brandCyan,
-  );
+  return colorScheme.copyWith(primary: _brandBlue, onPrimary: Colors.white, secondary: _brandPurple, onSecondary: Colors.white, tertiary: _brandCyan);
 }
 
 ThemeData _getYaruTheme(Brightness brightness) {
@@ -219,9 +199,7 @@ ThemeData _getYaruTheme(Brightness brightness) {
     // same density on all platforms so desktop matches mobile (defaults to compact on desktop)
     visualDensity: VisualDensity.standard,
     navigationBarTheme: colorScheme.brightness == Brightness.dark
-        ? NavigationBarThemeData(
-            iconTheme: WidgetStateProperty.all(const IconThemeData(color: Colors.white)),
-          )
+        ? NavigationBarThemeData(iconTheme: WidgetStateProperty.all(const IconThemeData(color: Colors.white)))
         : null,
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
@@ -237,10 +215,6 @@ ThemeData _getYaruTheme(Brightness brightness) {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
     ),
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      ),
-    ),
+    textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8))),
   );
 }

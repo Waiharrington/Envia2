@@ -90,9 +90,7 @@ class _ReceiveTabState extends State<ReceiveTab> {
                         colors: [Color(0xFF1D6BB4), Color(0xFF6740C3), Color(0xFF43258F)],
                       ),
                       borderRadius: BorderRadius.circular(28),
-                      boxShadow: [
-                        BoxShadow(color: const Color(0xFF5033AA).withValues(alpha: 0.18), blurRadius: 30, offset: const Offset(0, 14)),
-                      ],
+                      boxShadow: [BoxShadow(color: const Color(0xFF5033AA).withValues(alpha: 0.18), blurRadius: 30, offset: const Offset(0, 14))],
                     ),
                     child: Column(
                       children: [
@@ -161,16 +159,8 @@ class _ReceiveTabState extends State<ReceiveTab> {
             ),
           ),
         ),
-        _InfoBox(
-          serverState: serverState,
-          localIps: localIps,
-          showAdvanced: _showAdvanced,
-        ),
-        _CornerButtons(
-          showAdvanced: _showAdvanced,
-          showHistoryButton: _showHistoryButton,
-          toggleAdvanced: _toggleAdvanced,
-        ),
+        _InfoBox(serverState: serverState, localIps: localIps, showAdvanced: _showAdvanced),
+        _CornerButtons(showAdvanced: _showAdvanced, showHistoryButton: _showHistoryButton, toggleAdvanced: _toggleAdvanced),
       ],
     );
   }
@@ -221,7 +211,10 @@ class _AddressChip extends StatelessWidget {
         children: [
           const Icon(Icons.wifi_rounded, size: 15, color: Colors.white),
           const SizedBox(width: 6),
-          SelectableText(ip, style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600)),
+          SelectableText(
+            ip,
+            style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600),
+          ),
         ],
       ),
     );
@@ -233,11 +226,7 @@ class _CornerButtons extends StatelessWidget {
   final bool showHistoryButton;
   final Future<void> Function() toggleAdvanced;
 
-  const _CornerButtons({
-    required this.showAdvanced,
-    required this.showHistoryButton,
-    required this.toggleAdvanced,
-  });
+  const _CornerButtons({required this.showAdvanced, required this.showHistoryButton, required this.toggleAdvanced});
 
   @override
   Widget build(BuildContext context) {
@@ -259,11 +248,7 @@ class _CornerButtons extends StatelessWidget {
                   child: const Icon(Icons.history_rounded),
                 ),
               ),
-            CustomIconButton(
-              key: const ValueKey('info-btn'),
-              onPressed: toggleAdvanced,
-              child: const Icon(Icons.more_horiz_rounded),
-            ),
+            CustomIconButton(key: const ValueKey('info-btn'), onPressed: toggleAdvanced, child: const Icon(Icons.more_horiz_rounded)),
           ],
         ),
       ),
@@ -276,11 +261,7 @@ class _InfoBox extends StatelessWidget {
   final List<String> localIps;
   final bool showAdvanced;
 
-  const _InfoBox({
-    required this.serverState,
-    required this.localIps,
-    required this.showAdvanced,
-  });
+  const _InfoBox({required this.serverState, required this.localIps, required this.showAdvanced});
 
   @override
   Widget build(BuildContext context) {
@@ -296,20 +277,13 @@ class _InfoBox extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(15),
               child: Table(
-                columnWidths: const {
-                  0: IntrinsicColumnWidth(),
-                  1: IntrinsicColumnWidth(),
-                  2: IntrinsicColumnWidth(),
-                },
+                columnWidths: const {0: IntrinsicColumnWidth(), 1: IntrinsicColumnWidth(), 2: IntrinsicColumnWidth()},
                 children: [
                   TableRow(
                     children: [
                       Text(t.receiveTab.infoBox.alias),
                       const SizedBox(width: 10),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 30),
-                        child: SelectableText(serverState?.alias ?? '-'),
-                      ),
+                      Padding(padding: const EdgeInsets.only(right: 30), child: SelectableText(serverState?.alias ?? '-')),
                     ],
                   ),
                   TableRow(
@@ -318,19 +292,12 @@ class _InfoBox extends StatelessWidget {
                       const SizedBox(width: 10),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (localIps.isEmpty) Text(t.general.unknown),
-                          ...localIps.map((ip) => SelectableText(ip)),
-                        ],
+                        children: [if (localIps.isEmpty) Text(t.general.unknown), ...localIps.map((ip) => SelectableText(ip))],
                       ),
                     ],
                   ),
                   TableRow(
-                    children: [
-                      Text(t.receiveTab.infoBox.port),
-                      const SizedBox(width: 10),
-                      SelectableText(serverState?.port.toString() ?? '-'),
-                    ],
+                    children: [Text(t.receiveTab.infoBox.port), const SizedBox(width: 10), SelectableText(serverState?.port.toString() ?? '-')],
                   ),
                 ],
               ),
