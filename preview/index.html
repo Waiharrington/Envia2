@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Envia2 · Somos Dos — vista previa</title>
+<style>
+@font-face{font-family:Inter;src:url('assets/Inter-Variable.ttf') format('truetype');font-weight:100 900;font-display:swap}
+:root{--blue:#1d6bb4;--purple:#7036c8;--ink:#222332;--muted:#73778b;--line:#e7e8f0;--surface:#fff;--ground:#f5f6fb;--green:#168765}
+*{box-sizing:border-box}body{margin:0;background:var(--ground);color:var(--ink);font-family:Inter,'Segoe UI',sans-serif;height:100vh;overflow:hidden}
+.app{height:100vh;display:flex;padding:14px;gap:14px}.sidebar{width:236px;flex:0 0 236px;border-radius:26px;padding:20px 18px;color:white;background:linear-gradient(145deg,#1d6bb4 0%,#5530b1 54%,#351d79 100%);box-shadow:0 18px 42px #4e36a833;display:flex;flex-direction:column}.brand{height:132px;display:flex;align-items:center;justify-content:center;flex-direction:column}.brand img{width:184px;height:105px;object-fit:contain}.brand strong{letter-spacing:2px;font-size:12px;margin-top:-4px}.nav{display:flex;flex-direction:column;gap:9px;margin-top:24px}.navitem{height:48px;border-radius:16px;color:#ffffffbd;display:flex;align-items:center;gap:14px;padding:0 14px;font-size:14px;font-weight:550}.navitem.active{background:#ffffff2b;color:white;font-weight:700}.navitem svg{width:20px;height:20px}.sidefoot{margin-top:auto;font-size:10px;letter-spacing:1.3px;color:#ffffffb0;text-align:center;padding-bottom:8px}
+.main{min-width:0;flex:1;display:flex;flex-direction:column}.topbar{height:70px;display:flex;align-items:center;padding:0 22px;gap:12px}.topmark{width:38px;height:38px;object-fit:contain}.topname{font-weight:800;font-size:17px}.topstudio{font-size:9px;letter-spacing:1.3px;color:var(--muted);margin-top:3px}.section-chip{margin-left:auto;background:#e9e2f7;color:#50339a;border-radius:999px;padding:9px 15px;font-weight:700;font-size:13px}.canvas{min-height:0;flex:1;background:var(--surface);border:1px solid var(--line);border-radius:28px;display:flex;align-items:center;justify-content:center;padding:28px;overflow:auto}.content{width:min(100%,680px)}.heading{display:flex;align-items:flex-end;justify-content:space-between;margin:0 6px 18px}.eyebrow{font-size:10px;color:#70758a;letter-spacing:1.7px;font-weight:750}.heading h1{margin:5px 0 0;font-size:30px;letter-spacing:-.8px}.status{display:flex;align-items:center;gap:8px;background:#eaf6f1;color:var(--green);border-radius:999px;padding:9px 13px;font-size:12px;font-weight:750}.dot{width:8px;height:8px;border-radius:50%;background:#18a678;box-shadow:0 0 0 4px #18a67822}.hero{border-radius:28px;padding:28px 24px 25px;text-align:center;color:#fff;background:linear-gradient(135deg,#1d6bb4 0%,#6740c3 53%,#43258f 100%);box-shadow:0 18px 38px #5033aa2e}.mark{width:92px;height:92px;margin:0 auto 15px;border-radius:26px;background:#fff;padding:9px;display:grid;place-items:center}.mark img{width:100%;height:100%;object-fit:contain}.hero h2{font-size:25px;margin:0;font-weight:800;letter-spacing:-.4px}.hero p{margin:7px 0 0;color:#ffffffdc;font-size:14px}.addresses{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:20px}.addr{border-radius:99px;background:#ffffff28;padding:9px 13px;font-size:12px;font-weight:600}.actions{display:flex;gap:12px;margin-top:16px}.action{flex:1;min-height:54px;border:1px solid #1d6bb44d;border-radius:17px;background:#fff;color:var(--blue);font:700 14px Inter,sans-serif;display:flex;justify-content:center;align-items:center;gap:9px}.action.secondary{border-color:var(--line);color:#54586d}.action svg{width:19px;height:19px}.hint{margin:18px 6px 0;color:var(--muted);font-size:12px;line-height:1.5;text-align:center}.badge-preview{position:fixed;right:26px;bottom:22px;background:#1d2232;color:#fff;border-radius:99px;padding:8px 12px;font-size:10px;letter-spacing:.7px;box-shadow:0 4px 18px #1113}
+.mobile-nav{display:none}
+@media(max-width:850px){body{overflow:auto}.app{padding:8px;gap:0;min-height:100vh;height:auto;display:block}.sidebar{display:none}.main{min-height:calc(100vh - 92px)}.topbar{height:58px;padding:0 12px}.section-chip{display:none}.canvas{min-height:calc(100vh - 158px);padding:18px 14px;border-radius:22px}.heading{align-items:center}.heading h1{font-size:25px}.hero{padding:24px 17px;border-radius:23px}.hero h2{font-size:22px}.actions{flex-direction:column}.mobile-nav{display:flex;position:sticky;bottom:10px;z-index:3;margin:10px 4px 0;padding:8px;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 8px 26px #1b2b4a15}.mobile-nav .navitem{flex:1;height:58px;display:flex;flex-direction:column;justify-content:center;gap:3px;color:var(--muted);padding:3px;font-size:10px}.mobile-nav .navitem svg{width:19px;height:19px}.mobile-nav .navitem.active{background:#e9e2f7;color:#50339a}.badge-preview{right:14px;bottom:98px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+ <div class="brand"><img src="assets/wordmark-white.png" alt="Somos Dos Studio"><strong>ENVIA2</strong></div>
+ <nav class="nav">
+  <div class="navitem active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v13m0 0 5-5m-5 5-5-5M5 20h14"/></svg>Recibir</div>
+  <div class="navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg>Enviar</div>
+  <div class="navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.36-6.36-1.42 1.42M7.06 16.94l-1.42 1.42m12.72 0-1.42-1.42M7.06 7.06 5.64 5.64"/><circle cx="12" cy="12" r="4"/></svg>Ajustes</div>
+ </nav>
+ <div class="sidefoot">SOMOS DOS STUDIO</div>
+</aside>
+<main class="main">
+ <header class="topbar"><img class="topmark" src="assets/s2-mark.png" alt="S2"><div><div class="topname">Envia2</div><div class="topstudio">SOMOS DOS STUDIO</div></div><div class="section-chip">Recibir archivos</div></header>
+ <section class="canvas">
+  <div class="content">
+   <div class="heading"><div><div class="eyebrow">SOMOS DOS STUDIO</div><h1>Recibir</h1></div><div class="status"><span class="dot"></span>En línea</div></div>
+   <div class="hero"><div class="mark"><img src="assets/s2-mark.png" alt="Somos Dos"></div><h2>Tu computadora</h2><p>Lista para recibir archivos</p><div class="addresses"><span class="addr">Wi-Fi · 192.168.1.42</span><span class="addr">Puerto · 53317</span></div></div>
+   <div class="actions"><button class="action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 7h3v3H7zm7 0h3m-3 3h3M7 14h3v3H7zm7 0h3m-3 3h3"/></svg>Recibir mediante enlace</button><button class="action secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg>Historial</button></div>
+   <p class="hint">Comparte directamente en tu red local, con la identidad de Somos Dos Studio.</p>
+  </div>
+ </section>
+</main>
+</div>
+<nav class="mobile-nav">
+ <div class="navitem active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v13m0 0 5-5m-5 5-5-5M5 20h14"/></svg>Recibir</div>
+ <div class="navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg>Enviar</div>
+ <div class="navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v2m0 14v2m9-9h-2M5 12H3"/><circle cx="12" cy="12" r="4"/></svg>Ajustes</div>
+</nav>
+<div class="badge-preview">VISTA PREVIA · DATOS ILUSTRATIVOS</div>
+</body>
+</html>
+
