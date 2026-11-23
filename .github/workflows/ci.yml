@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [native]
   pull_request:
-    branches: [main]
+    branches: [native]
 
 env:
   FLUTTER_VERSION: "3.41.9"
