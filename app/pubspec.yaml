@@ -1,6 +1,6 @@
 name: localsend_app
-description: An open source cross-platform alternative to AirDrop
-homepage: https://localsend.org/
+description: Envia2 comparte archivos y mensajes directamente en la red local
+homepage: https://github.com/Waiharrington/Envia2-Native
 publish_to: "none"
 resolution: workspace
 

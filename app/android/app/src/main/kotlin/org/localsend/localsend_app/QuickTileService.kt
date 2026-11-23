@@ -1,4 +1,4 @@
-package org.localsend.localsend_app
+package com.waiharrington.envia2
 
 import android.annotation.SuppressLint
 import android.app.ActivityManager

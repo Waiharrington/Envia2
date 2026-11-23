@@ -11,11 +11,11 @@
   #define ResultDir "D:\inno-result"
 #endif
 
-#define MyAppName "LocalSend"
+#define MyAppName "Envia2"
 #define MyAppVersion "1.18.2"
 #define MyAppPublisher "Tien Do Nam"
 #define MyAppURL "https://localsend.org"
-#define MyAppExeName "localsend_app.exe"
+#define MyAppExeName "Envia2.exe"
 #define MyAppMsixHelper "localsend_msix_helper.msix"
 
 [Setup]
@@ -98,4 +98,4 @@ Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChang
 Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command Add-AppxPackage .\localsend_msix_helper.msix -ExternalLocation $(Get-Location)"; WorkingDir: {app}; Flags: nowait runhidden
 
 [UninstallRun]
-Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command Get-AppxPackage LocalSend.App | Remove-AppxPackage"; Flags: nowait runhidden
+Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command Get-AppxPackage Envia2.App | Remove-AppxPackage"; Flags: nowait runhidden
