@@ -1,0 +1,16 @@
+{
+  "name": "envia2-local",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Transferencia privada de archivos en tu red local",
+  "scripts": {
+    "start": "node server.js",
+    "build:windows": "powershell -NoProfile -ExecutionPolicy Bypass -File build-windows.ps1"
+  },
+  "devDependencies": {
+    "postject": "^1.0.0-alpha.6"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
