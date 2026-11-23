@@ -1,0 +1,58 @@
+name: Build Envia2 Windows
+
+on:
+  workflow_dispatch:
+
+env:
+  FLUTTER_VERSION: "3.41.9"
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Enable long paths
+        run: git config --system core.longpaths true
+
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+
+      - name: Build MSIX helper
+        shell: pwsh
+        run: |
+          $makepri = Get-ChildItem 'C:\Program Files (x86)\Windows Kits\10\bin\10.*\x64\makepri.exe' | Select-Object -Last 1
+          & $makepri.FullName new /pr support\build\msix\content /cf support\build\msix\priconfig.xml /mn support\build\msix\content\AppxManifest.xml /of support\build\msix\content\resources.pri /o
+          & 'C:\Program Files (x86)\Windows Kits\10\App Certification Kit\makeappx.exe' pack /o /d support\build\msix\content /nv /p app\windows\localsend_msix_helper.msix
+
+      - name: Install dependencies
+        working-directory: app
+        run: flutter pub get
+
+      - name: Compile Envia2
+        working-directory: app
+        run: flutter build windows --release
+
+      - name: Prepare portable package
+        shell: pwsh
+        working-directory: app
+        run: |
+          '{}' | Set-Content build\windows\x64\runner\Release\settings.json
+          Copy-Item ..\support\build\windows\x64\msvcp140.dll build\windows\x64\runner\Release\
+          Copy-Item ..\support\build\windows\x64\vcruntime140.dll build\windows\x64\runner\Release\
+          Copy-Item ..\support\build\windows\x64\vcruntime140_1.dll build\windows\x64\runner\Release\
+          Remove-Item build\windows\x64\runner\Release\localsend_msix_helper.msix -ErrorAction SilentlyContinue
+          Remove-Item build\windows\x64\runner\Release\install_msix_helper.ps1 -ErrorAction SilentlyContinue
+          Remove-Item build\windows\x64\runner\Release\Envia2.exe.manifest -ErrorAction SilentlyContinue
+
+      - name: Upload portable application
+        uses: actions/upload-artifact@v6
+        with:
+          name: Envia2-Windows-portable
+          path: app/build/windows/x64/runner/Release/
+          if-no-files-found: error
