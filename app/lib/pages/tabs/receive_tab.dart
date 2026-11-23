@@ -114,8 +114,8 @@ class _ReceiveTabState extends State<ReceiveTab> {
                         onPressed: () async {
                           await context.global.dispatchAsync(NavigateAction.push(const WebSharePage()));
                         },
-                        icon: Icon(Icons.language),
-                        label: Text(t.receiveTab.link),
+                        icon: const Icon(Icons.qr_code_2),
+                        label: Text(t.dialogs.qr.title),
                       ),
                     ),
                   ),

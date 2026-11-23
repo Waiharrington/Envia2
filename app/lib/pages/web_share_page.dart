@@ -14,6 +14,7 @@ import 'package:localsend_app/widget/dialogs/zoom_dialog.dart';
 import 'package:localsend_app/widget/responsive_list_view.dart';
 import 'package:localsend_isolates/util/sleep.dart';
 import 'package:logging/logging.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 import 'package:routerino/routerino.dart';
 
@@ -179,10 +180,60 @@ class _WebSharePageState extends State<WebSharePage> with Refena {
             final networkState = context.watch(localIpProvider);
             final settings = context.watch(settingsProvider);
             final pin = serverState.webPin;
+            final primaryUrl = networkState.localIps.isEmpty
+                ? null
+                : '${_encrypted ? 'https' : 'http'}://${networkState.localIps.first}:${serverState.port}';
+            final primaryUrlWithPin = switch ((primaryUrl, pin)) {
+              (String url, String pin) => '$url/?pin=${Uri.encodeQueryComponent(pin)}',
+              (String url, null) => url,
+              _ => null,
+            };
 
             return ResponsiveListView(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
               children: [
+                if (primaryUrlWithPin != null) ...[
+                  Center(
+                    child: Card(
+                      color: Theme.of(context).colorScheme.secondaryContainer,
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              t.dialogs.qr.title,
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                            const SizedBox(height: 12),
+                            Container(
+                              width: 240,
+                              height: 240,
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: PrettyQrView.data(
+                                errorCorrectLevel: QrErrorCorrectLevel.Q,
+                                data: primaryUrlWithPin,
+                                decoration: const PrettyQrDecoration(
+                                  shape: PrettyQrSmoothSymbol(
+                                    roundFactor: 0,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            SelectableText(primaryUrl!, textAlign: TextAlign.center),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                ],
                 Text(t.webSharePage.openLink(n: networkState.localIps.length), style: Theme.of(context).textTheme.titleMedium),
                 const SizedBox(height: 10),
                 Card(
