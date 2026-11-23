@@ -17,7 +17,8 @@ import 'package:refena_flutter/refena_flutter.dart';
 enum HomeTab {
   receive(Icons.south_rounded),
   send(Icons.north_east_rounded),
-  settings(Icons.tune_rounded);
+  settings(Icons.tune_rounded)
+  ;
 
   const HomeTab(this.icon);
 

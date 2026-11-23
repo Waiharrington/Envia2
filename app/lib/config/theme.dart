@@ -195,7 +195,8 @@ ThemeData _getYaruTheme(Brightness brightness) {
 
   return baseTheme.copyWith(
     colorScheme: colorScheme,
-    fontFamily: _brandFontFamily,
+    textTheme: baseTheme.textTheme.apply(fontFamily: _brandFontFamily),
+    primaryTextTheme: baseTheme.primaryTextTheme.apply(fontFamily: _brandFontFamily),
     // same density on all platforms so desktop matches mobile (defaults to compact on desktop)
     visualDensity: VisualDensity.standard,
     navigationBarTheme: colorScheme.brightness == Brightness.dark
