@@ -45,13 +45,31 @@ class SettingsTab extends StatelessWidget {
       builder: (context, vm) {
         final ref = context.ref;
         return ResponsiveListView(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 26),
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: Text(t.settingsTab.title, style: Theme.of(context).textTheme.titleLarge, textAlign: TextAlign.center),
+            Row(
+              children: [
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: [Theme.of(context).colorScheme.primary, Theme.of(context).colorScheme.secondary]),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: const Icon(Icons.tune_rounded, color: Colors.white),
+                ),
+                const SizedBox(width: 14),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('SOMOS DOS STUDIO', style: Theme.of(context).textTheme.labelSmall?.copyWith(letterSpacing: 1.4)),
+                    const SizedBox(height: 3),
+                    Text(t.settingsTab.title, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w800)),
+                  ],
+                ),
+              ],
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 22),
             _SettingsSection(
               title: t.settingsTab.general.title,
               children: [
@@ -586,7 +604,7 @@ class SettingsTab extends StatelessWidget {
                   orElse: () => Container(),
                 ),
             Text(
-              '© ${DateTime.now().year} Tien Do Nam',
+              '© ${DateTime.now().year} Tien Do Nam · Somos Dos Studio',
               textAlign: TextAlign.center,
             ),
             Center(
@@ -765,7 +783,7 @@ extension on ColorMode {
   String get humanName {
     return switch (this) {
       ColorMode.system => t.settingsTab.general.colorOptions.system,
-      ColorMode.localsend => t.appName,
+      ColorMode.localsend => 'Somos Dos',
       ColorMode.oled => t.settingsTab.general.colorOptions.oled,
       ColorMode.yaru => 'Yaru',
       ColorMode.custom => t.settingsTab.general.colorOptions.custom,

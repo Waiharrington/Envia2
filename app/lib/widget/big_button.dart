@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:localsend_app/config/theme.dart';
 import 'package:localsend_app/widget/responsive_builder.dart';
 
 class BigButton extends StatelessWidget {
@@ -27,27 +26,33 @@ class BigButton extends StatelessWidget {
     final buttonWidth = width ?? (sizingInformation.isDesktop ? desktopWidth : mobileWidth);
     return SizedBox(
       width: buttonWidth,
-      height: 65.0,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: filled ? colorScheme.primary : colorScheme.secondaryContainerIfDark,
-          foregroundColor: filled ? colorScheme.onPrimary : colorScheme.onSecondaryContainerIfDark,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          padding: const EdgeInsets.only(left: 2, right: 2, top: 10, bottom: 8),
-        ),
-        onPressed: onTap,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Icon(icon),
-            FittedBox(
-              alignment: Alignment.bottomCenter,
-              child: Text(label, maxLines: 1),
+      height: 88,
+      child: Material(
+        color: filled ? colorScheme.primaryContainer : colorScheme.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(20),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: filled ? colorScheme.primary.withValues(alpha: 0.28) : colorScheme.outlineVariant.withValues(alpha: 0.65),
+              ),
             ),
-          ],
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(icon, color: filled ? colorScheme.primary : colorScheme.secondary, size: 22),
+                const SizedBox(height: 8),
+                FittedBox(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(label, maxLines: 1, style: Theme.of(context).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w600)),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

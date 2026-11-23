@@ -8,7 +8,12 @@ import 'package:localsend_app/util/ui/dynamic_colors.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 import 'package:yaru/yaru.dart' as yaru;
 
-final _borderRadius = BorderRadius.circular(5);
+const _brandBlue = Color(0xFF1D6BB4);
+const _brandPurple = Color(0xFF7036C8);
+const _brandCyan = Color(0xFF59B9F2);
+const _brandFontFamily = 'SomosDosInter';
+
+final _borderRadius = BorderRadius.circular(12);
 
 ThemeData getTheme(ColorMode colorMode, Color customColor, Brightness brightness, DynamicColors? dynamicColors) {
   if (colorMode == ColorMode.yaru) {
@@ -28,14 +33,14 @@ ThemeData getTheme(ColorMode colorMode, Color customColor, Brightness brightness
   );
 
   // https://github.com/localsend/localsend/issues/52
-  final String? fontFamily;
+  final String fontFamily;
   if (checkPlatform([TargetPlatform.windows])) {
     fontFamily = switch (LocaleSettings.currentLocale) {
       AppLocale.ja => 'Yu Gothic UI',
       AppLocale.ko => 'Malgun Gothic',
       AppLocale.zhCn => 'Microsoft YaHei UI',
       AppLocale.zhHk || AppLocale.zhTw => 'Microsoft JhengHei UI',
-      _ => 'Segoe UI Variable Display',
+      _ => _brandFontFamily,
     };
   } else if (checkPlatform([TargetPlatform.linux])) {
     fontFamily = switch (LocaleSettings.currentLocale) {
@@ -43,15 +48,28 @@ ThemeData getTheme(ColorMode colorMode, Color customColor, Brightness brightness
       AppLocale.ko => 'Noto Sans CJK KR',
       AppLocale.zhCn => 'Noto Sans CJK SC',
       AppLocale.zhHk || AppLocale.zhTw => 'Noto Sans CJK TC',
-      _ => 'Noto Sans',
+      _ => _brandFontFamily,
     };
   } else {
-    fontFamily = null;
+    fontFamily = _brandFontFamily;
   }
 
   return ThemeData(
     colorScheme: colorScheme,
     useMaterial3: true,
+    cardTheme: CardThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: colorScheme.outlineVariant.withValues(alpha: 0.55)),
+      ),
+    ),
+    filledButtonTheme: FilledButtonThemeData(
+      style: FilledButton.styleFrom(
+        minimumSize: const Size(48, 48),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        textStyle: const TextStyle(fontWeight: FontWeight.w600),
+      ),
+    ),
     // same density on all platforms so desktop matches mobile (defaults to compact on desktop)
     visualDensity: VisualDensity.standard,
     navigationBarTheme: colorScheme.brightness == Brightness.dark
@@ -142,14 +160,21 @@ extension InputDecorationThemeExt on InputDecorationThemeData {
 
 ColorScheme _determineColorScheme(ColorMode mode, Color customColor, Brightness brightness, DynamicColors? dynamicColors) {
   final defaultColorScheme = ColorScheme.fromSeed(
-    seedColor: Colors.teal,
+    seedColor: _brandBlue,
     brightness: brightness,
+  ).copyWith(
+    primary: _brandBlue,
+    onPrimary: Colors.white,
+    secondary: _brandPurple,
+    onSecondary: Colors.white,
+    tertiary: _brandCyan,
+    surface: brightness == Brightness.light ? const Color(0xFFF8F8FC) : const Color(0xFF13121A),
   );
 
   final colorScheme = switch (mode) {
-    ColorMode.system => brightness == Brightness.light ? dynamicColors?.light : dynamicColors?.dark,
+    ColorMode.system => dynamicColors == null ? null : _withBrandAccents(brightness == Brightness.light ? dynamicColors.light : dynamicColors.dark),
     ColorMode.localsend => null,
-    ColorMode.oled => (dynamicColors?.dark ?? defaultColorScheme).copyWith(
+    ColorMode.oled => _withBrandAccents(dynamicColors?.dark ?? defaultColorScheme).copyWith(
       surface: Colors.black,
     ),
     ColorMode.yaru => throw 'Should reach here',
@@ -162,9 +187,19 @@ ColorScheme _determineColorScheme(ColorMode mode, Color customColor, Brightness 
   return colorScheme ?? defaultColorScheme;
 }
 
+ColorScheme _withBrandAccents(ColorScheme colorScheme) {
+  return colorScheme.copyWith(
+    primary: _brandBlue,
+    onPrimary: Colors.white,
+    secondary: _brandPurple,
+    onSecondary: Colors.white,
+    tertiary: _brandCyan,
+  );
+}
+
 ThemeData _getYaruTheme(Brightness brightness) {
   final baseTheme = brightness == Brightness.light ? yaru.yaruLight : yaru.yaruDark;
-  final colorScheme = baseTheme.colorScheme;
+  final colorScheme = _withBrandAccents(baseTheme.colorScheme);
 
   final lightInputBorder = OutlineInputBorder(
     borderSide: BorderSide(color: colorScheme.secondaryContainer),
@@ -179,6 +214,8 @@ ThemeData _getYaruTheme(Brightness brightness) {
   InputDecorationThemeData;
 
   return baseTheme.copyWith(
+    colorScheme: colorScheme,
+    fontFamily: _brandFontFamily,
     // same density on all platforms so desktop matches mobile (defaults to compact on desktop)
     visualDensity: VisualDensity.standard,
     navigationBarTheme: colorScheme.brightness == Brightness.dark

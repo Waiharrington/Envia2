@@ -1,11 +1,11 @@
 {
-  "name": "localsend_app",
-  "short_name": "localsend_app",
+  "name": "Envia2 · Somos Dos",
+  "short_name": "Envia2",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#0175C2",
-  "theme_color": "#0175C2",
-  "description": "A new Flutter project.",
+  "background_color": "#F8F8FC",
+  "theme_color": "#1D6BB4",
+  "description": "Envia2, de Somos Dos Studio. Comparte archivos directamente en tu red local.",
   "orientation": "portrait-primary",
   "prefer_related_applications": false,
   "icons": [

@@ -80,7 +80,7 @@ class LocalSendApp extends StatelessWidget {
           },
           child: ShortcutWatcher(
             child: MaterialApp(
-              title: t.appName,
+              title: 'Envia2 · Somos Dos',
               locale: TranslationProvider.of(context).flutterLocale,
               supportedLocales: AppLocaleUtils.supportedLocales,
               localizationsDelegates: GlobalMaterialLocalizations.delegates,

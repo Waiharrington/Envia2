@@ -55,7 +55,7 @@ Future<void> initTray() async {
     // No Linux implementation for setToolTip available as of tray_manager 0.2.2
     // https://pub.dev/packages/tray_manager#api
     if (!checkPlatform([TargetPlatform.linux])) {
-      await tm.trayManager.setToolTip(t.appName);
+      await tm.trayManager.setToolTip('Envia2 · Somos Dos');
     }
   } catch (e) {
     _logger.warning('Failed to init tray', e);

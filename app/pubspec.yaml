@@ -108,7 +108,15 @@ flutter:
 
   assets:
     - assets/img/
+    - assets/img/somosdos/
+    - assets/fonts/Inter-OFL.txt
     - assets/CHANGELOG.md
+
+  fonts:
+    - family: SomosDosInter
+      fonts:
+        - asset: assets/fonts/Inter-Variable.ttf
+          weight: 400
 
 flutter_gen:
   line_length: 150

@@ -6,6 +6,7 @@
 
 // The application's name. By default this is also the title of the Flutter window.
 PRODUCT_NAME = Envia2
+INFOPLIST_KEY_CFBundleDisplayName = Envia2 · Somos Dos
 
 // The application's bundle identifier
 PRODUCT_BUNDLE_IDENTIFIER = com.waiharrington.envia2

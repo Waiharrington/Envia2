@@ -53,7 +53,49 @@ class SendTab extends StatelessWidget {
         return ResponsiveListView(
           padding: EdgeInsets.zero,
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 18),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: _horizontalPadding),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 19),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [Theme.of(context).colorScheme.primary, Theme.of(context).colorScheme.secondary],
+                ),
+                borderRadius: BorderRadius.circular(22),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 46,
+                    height: 46,
+                    decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.18), borderRadius: BorderRadius.circular(16)),
+                    child: const Icon(Icons.north_east_rounded, color: Colors.white),
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          t.sendTab.title,
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.white, fontWeight: FontWeight.w800),
+                        ),
+                        const SizedBox(height: 3),
+                        Text(
+                          t.sendTab.help,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white.withValues(alpha: 0.9)),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 18),
             if (vm.selectedFiles.isEmpty) ...[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: _horizontalPadding),
@@ -297,7 +339,7 @@ class _CircularPopupButton<T> extends StatelessWidget {
         type: MaterialType.transparency,
         child: DividerTheme(
           data: DividerThemeData(
-            color: Theme.of(context).brightness == Brightness.light ? Colors.teal.shade100 : Colors.grey.shade700,
+            color: Theme.of(context).colorScheme.primaryContainer,
           ),
           child: PopupMenuButton(
             offset: const Offset(0, 40),

@@ -33,16 +33,16 @@ class AboutPage extends StatelessWidget {
           const SizedBox(height: 20),
           const LocalSendLogo(withText: true),
           Text(
-            '© ${DateTime.now().year} Tien Do Nam',
+            'Somos Dos Studio · © ${DateTime.now().year} Tien Do Nam',
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 10),
           Center(
             child: TextButton(
               onPressed: () async {
-                await launchUrl(Uri.parse('https://localsend.org'));
+                await launchUrl(Uri.parse('https://github.com/Waiharrington/Envia2'));
               },
-              child: const Text('localsend.org'),
+              child: const Text('Envia2 · Somos Dos'),
             ),
           ),
           const SizedBox(height: 10),

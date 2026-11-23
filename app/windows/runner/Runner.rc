@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "Tien Do Nam" "\0"
-            VALUE "FileDescription", "Envia2" "\0"
+            VALUE "CompanyName", "Somos Dos Studio" "\0"
+            VALUE "FileDescription", "Envia2 · Somos Dos" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "Envia2" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022-2026 Tien Do Nam" "\0"
             VALUE "OriginalFilename", "Envia2.exe" "\0"
-            VALUE "ProductName", "Envia2" "\0"
+            VALUE "ProductName", "Envia2 · Somos Dos" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
